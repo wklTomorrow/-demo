@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .an {
+            position: relative;
+            top: 100px;
+            width: 600px;
+            margin: 0 auto;
+            height: 600px;
+        }
+
+        #test {
+            position: absolute;
+            height: 50px;
+            width: 50px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="an">
+        <button onclick="go()">改变位置</button>
+        <div id="test">
+        </div>
+    </div>
+    <script>
+        let options = {
+            duration: 2000,
+            width: 400,
+            height: 400,
+            left: 50,
+            top: 50
+        }
+        function go() {
+            animate(options)
+        }
+
+        function animate(options) {
+            timeOut = null
+            let d = new Date()
+            let x = document.getElementById("test")
+            let startTime = d.getTime()
+            let startWidth = parseInt(x.offsetWidth)
+            let startHeight = parseInt(x.offsetHeight)
+            let tarHeight = parseInt(options.height)
+            let tarWidth = parseInt(options.width)
+            let startLeft = parseInt(x.offsetLeft)
+            let tarLeft = parseInt(options.left)
+            let startTop = parseInt(x.offsetTop)
+            let tarTop = parseInt(options.top)
+            timeOut = setInterval(() => {
+                an()
+            }, 20)
+            function an() {
+                let remain = Math.max(0, startTime + options.duration - (new Date()).getTime())
+                let present = 1 - remain / options.duration
+                let curWidth = (tarWidth - startWidth) * present + startWidth
+                let curHeight = (tarHeight - startHeight) * present + startHeight
+                let curLeft = (tarLeft - startLeft) * present + startLeft
+                let curTop = (tarTop - startTop) * present + startTop
+                if (present === 0) {
+                    x.style.width = curWidth + "px"
+                    x.style.height = curHeight + "px"
+                    x.style.left = curLeft + "px"
+                    x.style.top = curTop + "px"
+                    clearInterval(timeOut)
+                    timeOut = null
+                } else {
+                    x.style.left = curLeft + "px"
+                    x.style.width = curWidth + "px"
+                    x.style.height = curHeight + "px"
+                    x.style.top = curTop + "px"
+                }
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>

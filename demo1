@@ -1,0 +1,18 @@
+vue 自定义指令 vue.directive 需要在template中进行v-model 在vue.directive("model",function(el,binding,vnode)
+
+vue中dragging使用：npm install awe-dnd --save
+<template>
+ <div class="goodsPic-list"
+        v-for="(item,index) in picList"  :key="index"
+  v-dragging="{ item: item, list: picsList, group: 'item' }">
+            <img  :src="item"  alt=""  >
+          </div>
+</template>
+ mounted () {
+        this.$dragging.$on('dragged', ({ value }) => {
+          console.log(value.item)
+          console.log(value.list)
+          console.log(value.group)
+        })
+    }
+	//拖拽的使用。

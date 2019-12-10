@@ -1,0 +1,64 @@
+1、新增设备接口字段。
+2、测点对比接口。
+3、基础信息父级计量设备。
+4、综合能耗接口。
+5、计算公式编辑页面。
+6、量测点页面。
+7、更新树接口完成
+ //
+            // ele.deviceTreeTplgyBo.show = false;
+            // x[0].deviceTreeTplgyBo.show = true;
+            // ele.deviceTreeTplgyBo.isEdit = false;
+            // ele.deviceTreeTplgyBo.isAddChild = false;
+            // if (
+            //   ele.deviceTreeTplgyBo.childNodes &&
+            //   ele.deviceTreeTplgyBo.childNodes.length
+            // ) {
+            //   ele.deviceTreeTplgyBo.childNodes.forEach(l => {
+            //     l.show = false;
+            //     if (
+            //       x[0].deviceTreeTplgyBo.childNodes &&
+            //       x[0].deviceTreeTplgyBo.childNodes.length
+            //     ) {
+            //       if (x[0].deviceTreeTplgyBo.childNodes[0].id === l.id) {
+            //         l.show = true;
+            //       }
+            //     }
+            //     l.isEdit = false;
+            //     l.isAddChild = false;
+            //     if (l.childNodes && l.childNodes.length) {
+            //       l.childNodes.forEach(n => {
+            //         n.isEdit = false;
+            //         n.show = false;
+            //         n.isAddChild = false;
+            //         this.active = l.childNodes[0].id;
+            //         if (
+            //           x[0].deviceTreeTplgyBo.childNodes &&
+            //           x[0].deviceTreeTplgyBo.childNodes.length > 0 &&
+            //           x[0].deviceTreeTplgyBo.childNodes[0].childNodes &&
+            //           x[0].deviceTreeTplgyBo.childNodes[0].childNodes.length
+            //         ) {
+            //           this.click(
+            //             x[0].deviceTreeTplgyBo.childNodes[0].childNodes[0]
+            //           );
+            //         }
+            //       });
+            //     } else if (
+            //       x[0].deviceTreeTplgyBo.childNodes &&
+            //       x[0].deviceTreeTplgyBo.childNodes.length > 0 &&
+            //       x[0].deviceTreeTplgyBo.childNodes[0].childNodes === null
+            //     ) {
+            //       x[0].deviceTreeTplgyBo.childNodes[0].show = false;
+            //       this.active = x[0].deviceTreeTplgyBo.childNodes[0].id;
+            //       this.click(x[0].deviceTreeTplgyBo.childNodes[0]);
+            //     }
+            //   });
+            // } else if (x[0].deviceTreeTplgyBo.childNodes === null) {
+            //   x[0].deviceTreeTplgyBo.show = false;
+            //   this.active = x[0].deviceTreeTplgyBo.id;
+            //   this.click(x[0].deviceTreeTplgyBo);
+            // }
+            // else {
+            //   this.active = x[0].id;
+            //   this.select(x[0].deviceTreeTplgyBo);
+            // }

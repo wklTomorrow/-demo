@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .button {
+            height: 100px;
+            width: 100px;
+            border: 1px solid;
+            position: relative;
+        }
+
+        .tri {
+            top: 30px;
+            left: 30px;
+            position: absolute;
+            border-top: 10px solid red;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            transform: rotate(180deg);
+        }
+
+        .content {
+            height: 0px;
+            width: 100px;
+            transition: 2s;
+        }
+
+        @media screen and (max-width: 500px) {
+            .content {
+                background-color: red;
+                ;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="button">
+        <div class="tri"></div>
+    </div>
+    <div class="content"></div>
+    <div class="button">
+        <div class="tri"></div>
+    </div>
+    <div class="content"></div>
+    <div class="button">
+        <div class="tri"></div>
+    </div>
+    <div class="content"></div>
+</body>
+<script>
+    select()
+    function select() {
+        var show = false;
+        var x = document.getElementsByClassName('button');
+        x[0].addEventListener("click", function() {
+            alert(0)
+        })
+        x[0].appendChild(document.createElement("div"))
+        x[0].parentNode.appendChild(document.createElement("span"))
+        console.log(x[0].attributes,x[0].childNodes,x[0].parentNode)
+        console.log(x[0].baseURI,document.cookie)
+        console.log(x[0].getAttribute)
+        var index = document.getElementsByClassName('content')
+        var z = document.getElementsByClassName('tri')
+        for (let h = 0; h < x.length; h++) {
+            x[h].onclick = function () {
+                for (let y = 0; y < x.length; y++) {
+                    if (!z[y].style.transform) {
+                        z[y].style.transform = "rotate(180deg)"
+                    }
+                    if (y === h) {
+                        index[h].style.height = index[h].style.height ? "" : "100px"
+                        z[h].style.transform = z[h].style.transform === "rotate(180deg)" ? "rotate(0deg)" : "rotate(180deg)"
+                    } else {
+                        index[y].style.height = "";
+                        z[y].style.transform = "rotate(180deg)"
+                    }
+                }
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,15 @@
+<p><strong>商品名称：</strong>新鲜现摘云南绥江半边红李子甜脆脱骨李6斤当季绿色有机水果包邮</p></div>
+
+p{
+
+   display: block;
+
+   overflow: hidden;
+
+   white-space: nowrap;
+
+   text-overflow: ellipsis;
+
+   width: 70%;
+
+}

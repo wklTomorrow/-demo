@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #pic {
+            position: relative;
+            top: 100px;
+            margin: 0 auto;
+            width: 800px;
+            height: 300px;
+            border: 1px solid red;
+        }
+
+        #area1 {
+            position: absolute;
+            width: 50%;
+            height: 200px;
+            left: 0;
+            top: 50px;
+        }
+
+        #area2 {
+            position: absolute;
+            width: 50%;
+            top: 0;
+            left: 25%;
+            height: 300px;
+        }
+
+        #area3 {
+            position: absolute;
+            width: 50%;
+            top: 50px;
+            left: 400px;
+            height: 200px;
+        }
+
+        img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .class {
+            z-index: 999;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="pic">
+        <div class="div" id="area1">
+            <img class="img" src="./test.jpg" alt="">
+        </div>
+        <div class="div" id="area2">
+            <img class="img" src="./sight.jpg" alt="">
+        </div>
+        <div class="div" id="area3">
+            <img class="img" src="./girl.jpg" alt="">
+        </div>
+    </div>
+    <script>
+        go()
+
+        function go() {
+            let x = document.getElementById("area1")
+            let y = document.getElementById("area2")
+            let z = document.getElementById("area3")
+            let arr = []
+            // debugger
+            arr.push(x, y, z)
+            for (let i = 0; i < arr.length; i++) {
+                if(arr[i].classList.contains("class")) {
+                    arr[i].classList.remove("class")
+                }
+                if (arr[i].offsetLeft > 100) {
+                    arr[i].style.left = arr[i].offsetLeft - 200 + "px"
+                } else {
+                    arr[i].style.left = arr[i].offsetLeft + 400 + "px"
+                }
+                if(arr[i].offsetLeft === 200) {
+                    arr[i].style.top = arr[i].offsetTop - 50 + "px"
+                    arr[i].style.height = arr[i].offsetHeight + 100 + "px"
+                    arr[i].classList.add("class")
+                } else if (arr[i].offsetLeft === 0) {
+                    arr[i].style.top = arr[i].offsetTop + 50  + "px"
+                    arr[i].style.height = arr[i].offsetHeight - 100 + "px"
+                } else {
+                    arr[i].style.top = arr[i].offsetTop
+                    arr[i].style.height = arr[i].offsetHeight
+                }
+            }
+            timeout = setTimeout(() => {
+                go()
+            }, 2000)
+        }
+    </script>
+</body>
+
+</html>

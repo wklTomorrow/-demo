@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+.main {
+    height: 100px;
+    display: flex;
+}
+.text {
+    flex: 1;
+}
+</style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="text">
+            <input type="text" id="t1" value="t1" onchange="change()">
+        </div>
+        <div class="text">
+            <input type="text" id="t2" value="t2">
+        </div>
+    </div>
+    <script>
+        var x = document.getElementById('t1')
+        var y = document.getElementById('t2')
+        function change() {
+            y.value = x.value.toUpperCase()
+        }
+    </script>
+</body>
+
+</html>

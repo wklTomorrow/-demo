@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+    <style>
+        .pic {
+            position: relative;
+            top: 100px;
+            width: 200px;
+            margin: 0 auto;
+        }
+
+        .img {
+            border: 1px solid red;
+            position: relative;
+            top: 200px;
+            margin: 0 auto;
+            width: 300px;
+            height: 200px;
+        }
+
+        .img-area {
+            height: 100%;
+            width: 100%;
+        }
+
+        img {
+            height: 100%;
+            width: 100%;
+            display: flex;
+        }
+
+        .none {
+            display: none;
+        }
+
+        .menu {
+            position: absolute;
+            top: 160px;
+            height: 20px;
+            width: 100%;
+            z-index: 999;
+        }
+
+        ul {
+            /* display: flex;
+           flex-direction: row;  */
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        li {
+            cursor: pointer;
+            width: 20px;
+            color: #999999;
+            font-size: 32px;
+            float: left;
+        }
+
+        .goLeft {
+            cursor: pointer;
+            position: absolute;
+            top: 90px;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            border: 1px solid red;
+        }
+
+        .goRight {
+            cursor: pointer;
+            position: absolute;
+            top: 90px;
+            right: 0;
+            height: 20px;
+            width: 20px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="pic">
+        <button type="primary" class="button" onclick="go(0)">数组降维</button>
+        <input type="text" id="input" />
+    </div>
+    <div class="img">
+        <div class="img-area">
+            <img src="./girl.jpg" alt="">
+        </div>
+        <div class="img-area none">
+            <img src="./sight.jpg" alt="">
+        </div>
+        <div class="img-area none">
+            <img src="./test.jpg" alt="">
+        </div>
+        <div class="menu">
+            <ul>
+                <li class="li" onclick="select(0)"></li>
+                <li class="li" onclick="select(1)"></li>
+                <li class="li" onclick="select(2)"></li>
+            </ul>
+        </div>
+        <div class="goLeft" onclick="goPre(timeout)">
+            -
+        </div>
+        <div class="goRight" onclick="goNext(timeout)">
+            -
+        </div>
+    </div>
+    <script>
+        let arr1 = [1, 2, [1], [1, 2, [1]]]
+        function fuc(arr) {
+            return arr.reduce((m, n) =>
+                Array.isArray(n) ? m.concat(fuc(n)) : m.concat(n), []
+            )
+        }
+        let count = 0
+        let flag = true
+        go(count)
+        function go(count) {
+            let x = document.getElementsByClassName("img-area")
+            for (let i = 0; i < x.length; i++) {
+                x[i].classList.add("none")
+                if (i === count) {
+                    x[i].classList.remove("none")
+                }
+            }
+            count++
+            if (count === 3) count = 0
+            timeout = setTimeout(() => {
+                go(count)
+            }, 2000)
+        }
+
+        function goPre(timeout) {
+            clearTimeout(timeout)
+            let x = document.getElementsByClassName("img-area")
+            for (let i = 0; i < x.length; i++) {
+                if (!x[i].classList.contains("none")) {
+                    if (i == 0) {
+                        i = 2
+                    } else {
+                        i--
+                    }
+                    go(i)
+                }
+            }
+        }
+
+        function goNext(timeout) {
+            clearTimeout(timeout)
+            let x = document.getElementsByClassName("img-area")
+            for (let i = 0; i < x.length; i++) {
+                if (!x[i].classList.contains("none")) {
+                    if (i == 2) {
+                        i = 0
+                    } else {
+                        i++
+                    }
+                    go(i)
+                }
+            }
+        }
+        function select(x) {
+            clearTimeout(timeout)
+            go(x)
+        }
+
+    </script>
+</body>
+
+</html>
