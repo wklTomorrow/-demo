@@ -14,7 +14,7 @@
 
         .a {
             height: 300px;
-            width: 1500px;
+            width: 2000px;
             position: relative;
             overflow: hidden;
         }
@@ -56,6 +56,9 @@
             <div class="b">
                 <img src="./z.jpg" alt="">
             </div>
+            <div class="b">
+                <img src="./n.jpg" alt="">
+            </div>
         </div>
         <div class="f" onclick="goPre()">
             上一个
@@ -68,20 +71,25 @@
 
     <script>
         var timer = null
+        let timeOut = 5000
         let options = {
-            duration: 2000,
+            duration: 500,
             left: 0
         }
         next()
         function next() {
-            options.left = options.left - 500
+            timeOut = 5000
             if (options.left === -1500) {
+                document.getElementsByClassName("a")[0].style.left = 0
                 options.left = 0
             }
+            options.left = options.left - 500
             animate(options)
             timer = setTimeout(() => {
                 next()
-            }, 5000);
+            }, timeOut);
+
+
         }
         function animate(options) {
             let timer = null
@@ -117,9 +125,6 @@
         function goNext() {
             clearTimeout(timer)
             options.left = options.left
-            if (options.left === -1000) {
-                options.left = 500
-            }
             next()
         }
     </script>
