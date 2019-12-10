@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .c {
+            position: relative;
+            top: 100px;
+            height: 300px;
+            width: 500px;
+            border: 1px solid red;
+            overflow: hidden;
+        }
+
+        .a {
+            height: 300px;
+            width: 1500px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .b {
+            width: 500px;
+            float: left;
+        }
+
+        .f {
+            position: absolute;
+            height: 20px;
+            /* width: 30px; */
+            top: 140px;
+            border: 1px solid red;
+            cursor: pointer;
+        }
+
+        .h {
+            position: absolute;
+            height: 20px;
+            top: 140px;
+            border: 1px solid red;
+            cursor: pointer;
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="c">
+        <div class="a">
+            <div class="b">
+                <img src="./n.jpg" alt="">
+            </div>
+            <div class="b">
+                <img src="./y.jpg" alt="">
+            </div>
+            <div class="b">
+                <img src="./z.jpg" alt="">
+            </div>
+        </div>
+        <div class="f" onclick="goPre()">
+            上一个
+        </div>
+        <div class="h" onclick="goNext()">
+            下一个
+        </div>
+    </div>
+
+
+    <script>
+        var timer = null
+        let options = {
+            duration: 2000,
+            left: 0
+        }
+        next()
+        function next() {
+            options.left = options.left - 500
+            if (options.left === -1500) {
+                options.left = 0
+            }
+            animate(options)
+            timer = setTimeout(() => {
+                next()
+            }, 5000);
+        }
+        function animate(options) {
+            let timer = null
+            let x = document.getElementsByClassName("a")[0]
+            let d = new Date()
+            let startTime = d.getTime()
+            let startLeft = x.offsetLeft
+            let tarLeft = options.left
+            timer = setInterval(() => {
+                a()
+            }, 10)
+            function a() {
+                let remain = Math.max(0, startTime + options.duration - (new Date()).getTime())
+                let present = 1 - remain / options.duration
+                let curLeft = startLeft + (tarLeft - startLeft) * present
+                if (present === 1) {
+                    x.style.left = curLeft + "px"
+                    clearInterval(timer)
+                    timer = null
+                } else {
+                    x.style.left = curLeft + "px"
+                }
+            }
+        }
+        function goPre() {
+            clearTimeout(timer)
+            options.left = options.left + 1000
+            if (options.left === 1000) {
+                options.left = -500
+            }
+            next()
+        }
+        function goNext() {
+            clearTimeout(timer)
+            options.left = options.left
+            if (options.left === -1000) {
+                options.left = 500
+            }
+            next()
+        }
+    </script>
+</body>
+
+</html>
