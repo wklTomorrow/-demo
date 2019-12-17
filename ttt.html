@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <div>go</div>
+    <script>
+        var x = [
+            {
+                name: "1", id: 1, Pid: 0, show: false, children:
+                    [
+                        {
+                            name: "1 - 1", Pid: 1, show: false, id: 11, children:
+                                [
+                                    {
+                                        name: "1 - 1 - 1", Pid: 11, show: false, id: 111, children: []
+                                    },
+                                    {
+                                        name: "1 - 1 - 2", Pid: 11, show: false, id: 112, children: []
+                                    }
+                                ]
+
+                        },
+                        {
+                            name: "1 - 2", Pid: 1, show: false, id: 12, children: []
+                        }
+                    ]
+            },
+            {
+                name: "2", show: false, Pid: 0, id: 2, children: []
+            }
+        ]
+        go(x, 112)
+        //没有Pid
+        function go(arr, id) {
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i].id === id) {
+                    arr[i].show = true
+                } else {
+                    for (let z = 0; z < arr[i].children.length; z++) {
+                        if (arr[i].children[z].id === id) {
+                            arr[i].children.show = true
+                            go(x, arr[i].id)
+                        } else {
+                            go(arr[i].children, id)
+                        }
+                    }
+                }
+            }
+        }
+        //有Pid情况
+        // var showId = 111
+        // go(x, showId)
+        // function go(ele, showId) {
+        //     tt(ele, showId)
+        //     function tt(arr, id) {
+        //         for (let i = 0; i < arr.length; i++) {
+        //             if (arr[i].id === id) {
+        //                 arr[i].show = true
+        //                 tt(ele, arr[i].Pid)
+        //             } else {
+        //                 tt(arr[i].children, id)
+        //             }
+        //         }
+        //     }
+        // }
+    </script>
+</body>
+
+</html>

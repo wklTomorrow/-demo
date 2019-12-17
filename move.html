@@ -12,7 +12,25 @@
             overflow: hidden;
         }
 
+        .d {
+            position: relative;
+            left: 500px;
+            ;
+            top: 100px;
+            height: 300px;
+            width: 500px;
+            border: 1px solid red;
+            overflow: hidden;
+        }
+
         .a {
+            height: 300px;
+            width: 2000px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .z {
             height: 300px;
             width: 2000px;
             position: relative;
@@ -67,66 +85,274 @@
             下一个
         </div>
     </div>
+    <div class="d">
+        <div class="z">
+            <div class="b">
+                <img src="./n.jpg" alt="">
+            </div>
+            <div class="b">
+                <img src="./y.jpg" alt="">
+            </div>
+            <div class="b">
+                <img src="./z.jpg" alt="">
+            </div>
+            <div class="b">
+                <img src="./n.jpg" alt="">
+            </div>
+        </div>
+        <div class="f" onclick="goPre()">
+            上一个
+        </div>
+        <div class="h" onclick="goNext()">
+            下一个
+        </div>
+    </div>
 
 
     <script>
-        var timer = null
-        let timeOut = 5000
-        let options = {
-            duration: 500,
-            left: 0
+        // function animate(time, left, right, height) {
+        //     this.time = time;
+        //     this.left = left;
+        //     this.right = right;
+        //     this.height = height;
+        // };
+        // animate.prototype.onTest = function () {
+        //     console.log(111)
+        // };
+        // var run = { 类继承方式实现原生轮播图
+        //     options: {
+        //         time: 500,
+        //         left: 0,
+        //         timer: null,
+        //         durations: 5000,
+        //         conTime: 10
+        //     },
+        //     go: function (x) {
+        //         if (x.left === -1500) {
+        //             document.getElementsByClassName("a")[0].style.left = 0
+        //             x.left = 0
+        //         }
+        //         x.left = x.left - 500
+        //         run.animate(x)
+        //         timer = setTimeout(() => {
+        //             run.go(x)
+        //         }, run.options.durations);
+        //     },
+        //     animate: function (ele) {
+        //         let x = document.getElementsByClassName("a")[0]
+        //         let d = new Date()
+        //         let startTime = d.getTime()
+        //         let startLeft = x.offsetLeft
+        //         let tarLeft = ele.left
+        //         let params = {
+        //             x: x,
+        //             time: ele.time,
+        //             startTime: startTime,
+        //             startLeft: startLeft,
+        //             tarLeft: tarLeft
+        //         }
+        //         run.options.timer = setInterval(() => {
+
+        //             run.a(params)
+        //         }, run.options.conTime)
+        //     },
+        //     a: function (params) {
+        //         let timer = null
+        //         let remain = Math.max(0, params.startTime + params.time - (new Date()).getTime())
+        //         let present = 1 - remain / params.time
+        //         let curLeft = params.startLeft + (params.tarLeft - params.startLeft) * present
+        //         if (present === 1) {
+        //             params.x.style.left = curLeft + "px"
+        //             clearInterval(run.options.timer)
+        //             run.options.timer = null
+        //         } else {
+        //             params.x.style.left = curLeft + "px"
+        //         }
+
+        //     }
+        // }
+        // animate.prototype = run
+        // var x = new animate(500, 0, 0, 0)
+        // // x.options = {
+        // //     time:100,
+        // //     left: 0
+        // // }
+        // x.time
+        // x.go(x.options)
+        // var z = new animate(500, 0, 0, 0)
+        // z.onTest()
+        // 定义function的方式实现轮播图
+        function test(time, left, timer, durations, conTime, x) {
+            this.time = time
+            this.left = left
+            this.timer = timer
+            this.durations = durations
+            this.conTime = conTime
+            this.x = x
         }
-        next()
-        function next() {
-            timeOut = 5000
-            if (options.left === -1500) {
-                document.getElementsByClassName("a")[0].style.left = 0
-                options.left = 0
+
+        test.prototype.go = function () {
+            if (this.left === -1500) {
+                this.x.style.left = 0
+                this.left = 0
             }
-            options.left = options.left - 500
-            animate(options)
+            this.left = this.left - 500
+            this.animate()
             timer = setTimeout(() => {
-                next()
-            }, timeOut);
-
-
+                this.go()
+            }, this.durations);
         }
-        function animate(options) {
-            let timer = null
-            let x = document.getElementsByClassName("a")[0]
+
+        test.prototype.animate = function () {
+            let that = this
             let d = new Date()
             let startTime = d.getTime()
-            let startLeft = x.offsetLeft
-            let tarLeft = options.left
-            timer = setInterval(() => {
+            let startLeft = this.x.offsetLeft
+            let tarLeft = this.left
+            this.timer = setInterval(() => {
                 a()
-            }, 10)
+            }, this.conTime)
             function a() {
-                let remain = Math.max(0, startTime + options.duration - (new Date()).getTime())
-                let present = 1 - remain / options.duration
+                let remain = Math.max(0, startTime + that.time - (new Date()).getTime())
+                let present = 1 - remain / that.time
                 let curLeft = startLeft + (tarLeft - startLeft) * present
                 if (present === 1) {
-                    x.style.left = curLeft + "px"
-                    clearInterval(timer)
-                    timer = null
+                    that.x.style.left = curLeft + "px"
+                    clearInterval(that.timer)
+                    that.timer = null
                 } else {
-                    x.style.left = curLeft + "px"
+                    that.x.style.left = curLeft + "px"
                 }
             }
         }
-        function goPre() {
-            clearTimeout(timer)
-            options.left = options.left + 1000
-            if (options.left === 1000) {
-                options.left = -500
+
+
+        let nn = document.getElementsByClassName("z")[0]
+        let hh = document.getElementsByClassName("a")[0]
+        // var demo = new test(500, 0, null, 5000, 10, nn)
+        var demo1 = new test(1000, 0, null, 4000, 20, hh)
+
+        // demo.go()
+        demo1.go()
+
+        // 使用es6的class类的方式实现轮播图
+        class Animate {
+            constructor(time, left, timer, durations, conTime, x) {
+                this.time = time;
+                this.left = left;
+                this.timer = timer;
+                this.durations = durations;
+                this.conTime = conTime;
+                this.x = x
             }
-            next()
+
+            go() {
+                if (this.left === -1500) {
+                    this.x.style.left = 0
+                    this.left = 0
+                }
+                this.left = this.left - 500
+                this.animate()
+                timer = setTimeout(() => {
+                    this.go()
+                }, this.durations);
+            }
+
+            animate() {
+                let that = this
+                let d = new Date()
+                let startTime = d.getTime()
+                let startLeft = this.x.offsetLeft
+                let tarLeft = this.left
+                this.timer = setInterval(() => {
+                    a()
+                }, this.conTime)
+                function a() {
+                    let remain = Math.max(0, startTime + that.time - (new Date()).getTime())
+                    let present = 1 - remain / that.time
+                    let curLeft = startLeft + (tarLeft - startLeft) * present
+                    if (present === 1) {
+                        that.x.style.left = curLeft + "px"
+                        clearInterval(that.timer)
+                        that.timer = null
+                    } else {
+                        that.x.style.left = curLeft + "px"
+                    }
+                }
+            }
+
         }
-        function goNext() {
-            clearTimeout(timer)
-            options.left = options.left
-            next()
-        }
+        let goClass = new Animate(500, 0, null, 5000, 10, nn)
+
+        goClass.go()
+
+        // steTimeout(function(){
+            // debugger
+        // })
+
+
+
+
+        // function hello() { }
+        // var timer = null
+        // let timeOut = 5000
+        // let options = {
+        //     duration: 500,
+        //     left: 0
+        // }
+        // next()
+        // function next() {
+        //     timeOut = 5000
+        //     if (options.left === -1500) {
+        //         document.getElementsByClassName("a")[0].style.left = 0
+        //         options.left = 0
+        //     }
+        //     options.left = options.left - 500
+        //     animate(options)
+        //     timer = setTimeout(() => {
+        //         next()
+        //     }, timeOut);
+
+
+        // }
+        // // class animate
+
+        // function animate(options) {
+        //     let timer = null
+        //     let x = document.getElementsByClassName("a")[0]
+        //     let d = new Date()
+        //     let startTime = d.getTime()
+        //     let startLeft = x.offsetLeft
+        //     let tarLeft = options.left
+        //     timer = setInterval(() => {
+        //         a()
+        //     }, 10)
+        //     function a() {
+        //         let remain = Math.max(0, startTime + options.duration - (new Date()).getTime())
+        //         let present = 1 - remain / options.duration
+        //         let curLeft = startLeft + (tarLeft - startLeft) * present
+        //         if (present === 1) {
+        //             x.style.left = curLeft + "px"
+        //             clearInterval(timer)
+        //             timer = null
+        //         } else {
+        //             x.style.left = curLeft + "px"
+        //         }
+        //     }
+        // }
+        // function goPre() {
+        //     clearTimeout(timer)
+        //     options.left = options.left + 1000
+        //     if (options.left === 1000) {
+        //         options.left = -500
+        //     }
+        //     next()
+        // }
+        // function goNext() {
+        //     clearTimeout(timer)
+        //     options.left = options.left
+        //     next()
+        // }
     </script>
 </body>
 
