@@ -67,6 +67,19 @@
         //         }
         //     }
         // }
+
+        // 1,1,2,3,5,8 斐波那契数列
+        demo(1, 1)
+        function demo(a, b) {
+            if (b < 100) {
+                console.log(b)
+                b = a + b
+                a = b - a
+                demo(a, b)
+            } else {
+                return
+            }
+        }
     </script>
 </body>
 
